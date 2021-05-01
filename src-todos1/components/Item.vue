@@ -9,6 +9,7 @@
 </template>
 
 <script>
+import PubSub from 'pubsub-js'
 export default {
   data () {
     return {
@@ -19,7 +20,6 @@ export default {
   props: {
     todo: Object,
     index: Number,
-    deleteItem: Function
   },
   methods: {
     handleEnter (isEnter) {
@@ -38,7 +38,9 @@ export default {
         return
       }
       if (window.confirm(`确定删除${todo.title}吗？`)) {
-        deleteItem(index)
+        // deleteItem(index)
+        // PubSub.publish('deleteItem', index)
+        PubSub.publish('deleteItem', index)
       }
     }
   }
